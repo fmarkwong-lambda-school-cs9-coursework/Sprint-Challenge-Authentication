@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { withRouter } from "react-router-dom";
 
 
-class Login extends Component {
+export default class Register extends Component {
   constructor() {
     super();
     this.state = {
@@ -18,11 +17,10 @@ class Login extends Component {
 
   submitHandler = e => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/login', this.state)
-      .then(token => {
-        localStorage.token = token.data.token;
-        console.log('token is', token.data.token);
-        this.props.history.push('/jokes');
+    axios.post('http://localhost:5000/api/users', this.state)
+      .then(newUser => {
+        // localStorage.token = token.data.token;
+        console.log('new user is', newUser);
 
       })
       .catch(err => console.log(err));
@@ -37,19 +35,9 @@ class Login extends Component {
           <span id="reauth-email" className="reauth-email"></span>
           <input name="username" value={this.state.username} onChange={this.inputHandler} className="form-control" placeholder="User Name" required autoFocus />
           <input name="password" value={this.state.password} onChange={this.inputHandler}  type="password"  className="form-control" placeholder="Password" required />
-          <div id="remember" className="checkbox">
-            <label>
-              <input type="checkbox" value="remember-me" /> Remember me
-            </label>
-          </div>
-          <button className="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+          <button className="btn btn-lg btn-primary btn-block btn-signin" type="submit">Register</button>
         </form>
-        <a href="#" className="forgot-password">
-          Forgot the password?
-        </a>
       </div>
     );
   }
 }
-
-export default withRouter(Login);
