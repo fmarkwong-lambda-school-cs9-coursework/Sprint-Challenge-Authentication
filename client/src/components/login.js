@@ -23,6 +23,7 @@ export default class Login extends Component {
         console.log('token is', token.data.token);
 
       })
+      .catch(err => console.log(err));
   }
 
   render() {
